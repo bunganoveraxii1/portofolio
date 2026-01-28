@@ -1,0 +1,1225 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Elegant Handmade Bracelets - Crafted with Love</title>
+  <meta name="description" content="Discover our collection of handmade elegant bracelets. Custom designs, premium materials, and personalized service.">
+  <meta name="keywords" content="handmade bracelets, elegant jewelry, custom bracelets, artisan jewelry">
+  <script src="/_sdk/data_sdk.js"></script>
+  <script src="/_sdk/element_sdk.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <style>
+        body {
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --primary-pink: #f8bbd9;
+            --secondary-pink: #f4a6cd;
+            --accent-pink: #e879f9;
+            --dark-pink: #be185d;
+            --light-pink: #fdf2f8;
+        }
+        
+        .dark {
+            --primary-pink: #831843;
+            --secondary-pink: #9d174d;
+            --accent-pink: #be185d;
+            --dark-pink: #f8bbd9;
+            --light-pink: #1f1f1f;
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, var(--primary-pink), var(--secondary-pink));
+        }
+        
+        .parallax {
+            transform: translateY(var(--scroll-y, 0));
+        }
+        
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.6s ease;
+        }
+        
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .product-card {
+            transition: all 0.3s ease;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+        
+        .chatbot {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+        
+        .testimonial-carousel {
+            animation: scroll 20s linear infinite;
+        }
+        
+        @keyframes scroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+        
+        .counter {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--accent-pink);
+        }
+        
+        .dark-mode {
+            background-color: #1a1a1a;
+            color: #ffffff;
+        }
+        
+        .dark-mode .bg-white {
+            background-color: #2a2a2a !important;
+        }
+        
+        .dark-mode .text-gray-800 {
+            color: #ffffff !important;
+        }
+        
+        .dark-mode .text-gray-600 {
+            color: #cccccc !important;
+        }
+        
+        .video-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+        }
+    </style>
+  <style>@view-transition { navigation: auto; }</style>
+ </head>
+ <body class="font-sans"><!-- Navigation -->
+  <nav class="fixed top-0 w-full bg-white/90 backdrop-blur-md shadow-lg z-50 transition-all duration-300">
+   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex justify-between items-center h-16">
+     <div class="flex items-center">
+      <h1 class="text-2xl font-bold text-pink-600" id="nav-title">Elegant Bracelets</h1>
+     </div>
+     <div class="hidden md:block">
+      <div class="ml-10 flex items-baseline space-x-4"><a href="#home" class="nav-link text-gray-800 hover:text-pink-600 px-3 py-2 rounded-md text-sm font-medium transition-colors">Home</a> <a href="#products" class="nav-link text-gray-800 hover:text-pink-600 px-3 py-2 rounded-md text-sm font-medium transition-colors">Products</a> <a href="#custom" class="nav-link text-gray-800 hover:text-pink-600 px-3 py-2 rounded-md text-sm font-medium transition-colors">Custom Order</a> <a href="#gallery" class="nav-link text-gray-800 hover:text-pink-600 px-3 py-2 rounded-md text-sm font-medium transition-colors">Gallery</a> <a href="#blog" class="nav-link text-gray-800 hover:text-pink-600 px-3 py-2 rounded-md text-sm font-medium transition-colors">Blog</a> <a href="#contact" class="nav-link text-gray-800 hover:text-pink-600 px-3 py-2 rounded-md text-sm font-medium transition-colors">Contact</a>
+      </div>
+     </div>
+     <div class="flex items-center space-x-4"><!-- Language Switcher --> <select id="language-switcher" class="bg-transparent border border-pink-300 rounded px-2 py-1 text-sm"> <option value="en">EN</option> <option value="id">ID</option> </select> <!-- Dark Mode Toggle --> <button id="dark-mode-toggle" class="p-2 rounded-full bg-pink-100 hover:bg-pink-200 transition-colors"> <i class="fas fa-moon text-pink-600"></i> </button> <!-- Search -->
+      <div class="relative"><input type="text" id="search-bar" placeholder="Search products..." class="pl-8 pr-4 py-2 border border-pink-300 rounded-full text-sm focus:outline-none focus:ring-2 focus:ring-pink-500"> <i class="fas fa-search absolute left-3 top-3 text-pink-400 text-sm"></i>
+      </div>
+     </div><!-- Mobile menu button -->
+     <div class="md:hidden"><button id="mobile-menu-btn" class="text-gray-800 hover:text-pink-600 focus:outline-none"> <i class="fas fa-bars"></i> </button>
+     </div>
+    </div>
+   </div><!-- Mobile menu -->
+   <div id="mobile-menu" class="md:hidden hidden bg-white border-t">
+    <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3"><a href="#home" class="block px-3 py-2 text-gray-800 hover:text-pink-600">Home</a> <a href="#products" class="block px-3 py-2 text-gray-800 hover:text-pink-600">Products</a> <a href="#custom" class="block px-3 py-2 text-gray-800 hover:text-pink-600">Custom Order</a> <a href="#gallery" class="block px-3 py-2 text-gray-800 hover:text-pink-600">Gallery</a> <a href="#blog" class="block px-3 py-2 text-gray-800 hover:text-pink-600">Blog</a> <a href="#contact" class="block px-3 py-2 text-gray-800 hover:text-pink-600">Contact</a>
+    </div>
+   </div>
+  </nav><!-- Hero Section -->
+  <section id="home" class="relative min-h-screen flex items-center justify-center overflow-hidden">
+   <div class="absolute inset-0 gradient-bg"></div>
+   <div class="relative z-10 text-center text-white px-4 max-w-4xl mx-auto">
+    <h1 class="text-5xl md:text-7xl font-bold mb-6 fade-in" id="hero-title">Crafted with Love, Worn with Pride</h1>
+    <p class="text-xl md:text-2xl mb-8 fade-in" id="hero-subtitle">Discover our collection of handmade elegant bracelets, each piece uniquely crafted for the modern woman</p>
+    <div class="space-x-4 fade-in"><button class="bg-white text-pink-600 px-8 py-3 rounded-full font-semibold hover:bg-pink-50 transition-colors">Shop Now</button> <button class="border-2 border-white text-white px-8 py-3 rounded-full font-semibold hover:bg-white hover:text-pink-600 transition-colors">Custom Design</button>
+    </div>
+   </div><!-- Scroll indicator -->
+   <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce"><i class="fas fa-chevron-down text-white text-2xl"></i>
+   </div>
+  </section><!-- Statistics Counter -->
+  <section class="py-16 bg-white">
+   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+     <div class="fade-in">
+      <div class="counter" data-target="1250">
+       0
+      </div>
+      <p class="text-gray-600 mt-2">Happy Customers</p>
+     </div>
+     <div class="fade-in">
+      <div class="counter" data-target="500">
+       0
+      </div>
+      <p class="text-gray-600 mt-2">Unique Designs</p>
+     </div>
+     <div class="fade-in">
+      <div class="counter" data-target="98">
+       0
+      </div>
+      <p class="text-gray-600 mt-2">Satisfaction Rate %</p>
+     </div>
+     <div class="fade-in">
+      <div class="counter" data-target="5">
+       0
+      </div>
+      <p class="text-gray-600 mt-2">Years Experience</p>
+     </div>
+    </div>
+   </div>
+  </section><!-- Product Catalog -->
+  <section id="products" class="py-20 bg-pink-50">
+   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-16 fade-in">
+     <h2 class="text-4xl font-bold text-gray-800 mb-4">Our Collection</h2>
+     <p class="text-xl text-gray-600">Handcrafted bracelets for every style and occasion</p>
+    </div><!-- Product Filters -->
+    <div class="flex flex-wrap justify-center gap-4 mb-12 fade-in"><button class="filter-btn active bg-pink-600 text-white px-6 py-2 rounded-full" data-filter="all">All</button> <button class="filter-btn bg-white text-pink-600 border border-pink-600 px-6 py-2 rounded-full hover:bg-pink-600 hover:text-white transition-colors" data-filter="silver">Silver</button> <button class="filter-btn bg-white text-pink-600 border border-pink-600 px-6 py-2 rounded-full hover:bg-pink-600 hover:text-white transition-colors" data-filter="gold">Gold</button> <button class="filter-btn bg-white text-pink-600 border border-pink-600 px-6 py-2 rounded-full hover:bg-pink-600 hover:text-white transition-colors" data-filter="gemstone">Gemstone</button> <button class="filter-btn bg-white text-pink-600 border border-pink-600 px-6 py-2 rounded-full hover:bg-pink-600 hover:text-white transition-colors" data-filter="custom">Custom</button>
+    </div><!-- Product Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="product-grid"><!-- Products will be dynamically loaded -->
+    </div>
+   </div>
+  </section><!-- Custom Order Section -->
+  <section id="custom" class="py-20 bg-white">
+   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+     <div class="fade-in">
+      <h2 class="text-4xl font-bold text-gray-800 mb-6">Custom Design Service</h2>
+      <p class="text-lg text-gray-600 mb-8">Create your perfect bracelet with our personalized design service. Choose materials, colors, and add special engravings to make it uniquely yours.</p>
+      <div class="space-y-4 mb-8">
+       <div class="flex items-center"><i class="fas fa-check-circle text-pink-600 mr-3"></i> <span>Free design consultation</span>
+       </div>
+       <div class="flex items-center"><i class="fas fa-check-circle text-pink-600 mr-3"></i> <span>Premium materials selection</span>
+       </div>
+       <div class="flex items-center"><i class="fas fa-check-circle text-pink-600 mr-3"></i> <span>Personal engraving service</span>
+       </div>
+       <div class="flex items-center"><i class="fas fa-check-circle text-pink-600 mr-3"></i> <span>Gift wrapping included</span>
+       </div>
+      </div><button class="bg-pink-600 text-white px-8 py-3 rounded-full font-semibold hover:bg-pink-700 transition-colors">Start Custom Design</button>
+     </div>
+     <div class="fade-in">
+      <form id="custom-order-form" class="bg-pink-50 p-8 rounded-2xl">
+       <h3 class="text-2xl font-bold text-gray-800 mb-6">Request Custom Quote</h3>
+       <div class="space-y-4">
+        <div><label class="block text-gray-700 font-medium mb-2">Your Name</label> <input type="text" id="custom-name" class="w-full px-4 py-3 border border-pink-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500" required>
+        </div>
+        <div><label class="block text-gray-700 font-medium mb-2">Email</label> <input type="email" id="custom-email" class="w-full px-4 py-3 border border-pink-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500" required>
+        </div>
+        <div><label class="block text-gray-700 font-medium mb-2">Design Description</label> <textarea id="custom-description" rows="4" class="w-full px-4 py-3 border border-pink-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500" placeholder="Describe your dream bracelet..."></textarea>
+        </div>
+        <div><label class="block text-gray-700 font-medium mb-2">Preferred Material</label> <select id="custom-material" class="w-full px-4 py-3 border border-pink-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500"> <option value="">Select Material</option> <option value="silver">Sterling Silver</option> <option value="gold">14K Gold</option> <option value="rose-gold">Rose Gold</option> <option value="platinum">Platinum</option> </select>
+        </div><button type="submit" class="w-full bg-pink-600 text-white py-3 rounded-lg font-semibold hover:bg-pink-700 transition-colors"> <span class="submit-text">Submit Request</span> <span class="loading-text hidden">Submitting...</span> </button>
+       </div>
+      </form>
+     </div>
+    </div>
+   </div>
+  </section><!-- Gallery Section -->
+  <section id="gallery" class="py-20 bg-pink-50">
+   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-16 fade-in">
+     <h2 class="text-4xl font-bold text-gray-800 mb-4">Gallery</h2>
+     <p class="text-xl text-gray-600">See our beautiful creations and crafting process</p>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="gallery-grid"><!-- Gallery items will be dynamically loaded -->
+    </div>
+   </div>
+  </section><!-- Testimonials -->
+  <section class="py-20 bg-white overflow-hidden">
+   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-16 fade-in">
+     <h2 class="text-4xl font-bold text-gray-800 mb-4">What Our Customers Say</h2>
+     <p class="text-xl text-gray-600">Real reviews from happy customers</p>
+    </div>
+    <div class="relative">
+     <div class="testimonial-carousel flex space-x-8" id="testimonial-track"><!-- Testimonials will be dynamically loaded -->
+     </div>
+    </div><!-- Add Review Form -->
+    <div class="mt-16 max-w-2xl mx-auto bg-pink-50 p-8 rounded-2xl fade-in">
+     <h3 class="text-2xl font-bold text-gray-800 mb-6 text-center">Share Your Experience</h3>
+     <form id="review-form">
+      <div class="space-y-4">
+       <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div><label class="block text-gray-700 font-medium mb-2">Your Name</label> <input type="text" id="review-name" class="w-full px-4 py-3 border border-pink-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500" required>
+        </div>
+        <div><label class="block text-gray-700 font-medium mb-2">Product Purchased</label> <input type="text" id="review-product" class="w-full px-4 py-3 border border-pink-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500">
+        </div>
+       </div>
+       <div><label class="block text-gray-700 font-medium mb-2">Rating</label>
+        <div class="flex space-x-2" id="rating-stars"><i class="fas fa-star text-gray-300 text-2xl cursor-pointer hover:text-yellow-400 transition-colors" data-rating="1"></i> <i class="fas fa-star text-gray-300 text-2xl cursor-pointer hover:text-yellow-400 transition-colors" data-rating="2"></i> <i class="fas fa-star text-gray-300 text-2xl cursor-pointer hover:text-yellow-400 transition-colors" data-rating="3"></i> <i class="fas fa-star text-gray-300 text-2xl cursor-pointer hover:text-yellow-400 transition-colors" data-rating="4"></i> <i class="fas fa-star text-gray-300 text-2xl cursor-pointer hover:text-yellow-400 transition-colors" data-rating="5"></i>
+        </div>
+       </div>
+       <div><label class="block text-gray-700 font-medium mb-2">Your Review</label> <textarea id="review-message" rows="4" class="w-full px-4 py-3 border border-pink-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500" placeholder="Tell us about your experience..."></textarea>
+       </div><button type="submit" class="w-full bg-pink-600 text-white py-3 rounded-lg font-semibold hover:bg-pink-700 transition-colors"> <span class="submit-text">Submit Review</span> <span class="loading-text hidden">Submitting...</span> </button>
+      </div>
+     </form>
+    </div>
+   </div>
+  </section><!-- Blog Section -->
+  <section id="blog" class="py-20 bg-pink-50">
+   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-16 fade-in">
+     <h2 class="text-4xl font-bold text-gray-800 mb-4">Style &amp; Care Tips</h2>
+     <p class="text-xl text-gray-600">Learn how to style and maintain your elegant bracelets</p>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="blog-grid"><!-- Blog posts will be dynamically loaded -->
+    </div>
+   </div>
+  </section><!-- Contact Section -->
+  <section id="contact" class="py-20 bg-white">
+   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-16 fade-in">
+     <h2 class="text-4xl font-bold text-gray-800 mb-4">Get In Touch</h2>
+     <p class="text-xl text-gray-600">We'd love to hear from you</p>
+    </div>
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12"><!-- Contact Form -->
+     <div class="fade-in">
+      <form id="contact-form" class="space-y-6">
+       <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div><label class="block text-gray-700 font-medium mb-2">First Name</label> <input type="text" id="contact-first-name" class="w-full px-4 py-3 border border-pink-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500" required>
+        </div>
+        <div><label class="block text-gray-700 font-medium mb-2">Last Name</label> <input type="text" id="contact-last-name" class="w-full px-4 py-3 border border-pink-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500" required>
+        </div>
+       </div>
+       <div><label class="block text-gray-700 font-medium mb-2">Email</label> <input type="email" id="contact-email" class="w-full px-4 py-3 border border-pink-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500" required>
+       </div>
+       <div><label class="block text-gray-700 font-medium mb-2">Subject</label> <select id="contact-subject" class="w-full px-4 py-3 border border-pink-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500"> <option value="">Select Subject</option> <option value="general">General Inquiry</option> <option value="custom">Custom Order</option> <option value="support">Customer Support</option> <option value="wholesale">Wholesale Inquiry</option> </select>
+       </div>
+       <div><label class="block text-gray-700 font-medium mb-2">Message</label> <textarea id="contact-message" rows="6" class="w-full px-4 py-3 border border-pink-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500" placeholder="How can we help you?"></textarea>
+       </div><button type="submit" class="w-full bg-pink-600 text-white py-3 rounded-lg font-semibold hover:bg-pink-700 transition-colors"> <span class="submit-text">Send Message</span> <span class="loading-text hidden">Sending...</span> </button>
+      </form>
+     </div><!-- Contact Info & Map -->
+     <div class="fade-in">
+      <div class="bg-pink-50 p-8 rounded-2xl mb-8">
+       <h3 class="text-2xl font-bold text-gray-800 mb-6">Visit Our Studio</h3>
+       <div class="space-y-4">
+        <div class="flex items-start"><i class="fas fa-map-marker-alt text-pink-600 mt-1 mr-3"></i>
+         <div>
+          <p class="font-medium text-gray-800">Address</p>
+          <p class="text-gray-600" id="studio-address">123 Artisan Street, Creative District<br>
+           New York, NY 10001</p>
+         </div>
+        </div>
+        <div class="flex items-start"><i class="fas fa-phone text-pink-600 mt-1 mr-3"></i>
+         <div>
+          <p class="font-medium text-gray-800">Phone</p>
+          <p class="text-gray-600" id="phone-number">+1 (555) 123-4567</p>
+         </div>
+        </div>
+        <div class="flex items-start"><i class="fas fa-envelope text-pink-600 mt-1 mr-3"></i>
+         <div>
+          <p class="font-medium text-gray-800">Email</p>
+          <p class="text-gray-600" id="email-address">hello@elegantbracelets.com</p>
+         </div>
+        </div>
+        <div class="flex items-start"><i class="fas fa-clock text-pink-600 mt-1 mr-3"></i>
+         <div>
+          <p class="font-medium text-gray-800">Hours</p>
+          <p class="text-gray-600">Mon-Fri: 9AM-6PM<br>
+           Sat: 10AM-4PM<br>
+           Sun: Closed</p>
+         </div>
+        </div>
+       </div>
+      </div><!-- Map Placeholder -->
+      <div class="bg-gray-200 h-64 rounded-2xl flex items-center justify-center">
+       <div class="text-center"><i class="fas fa-map text-4xl text-gray-400 mb-4"></i>
+        <p class="text-gray-600">Interactive Map</p>
+        <p class="text-sm text-gray-500">Studio Location</p>
+       </div>
+      </div>
+     </div>
+    </div>
+   </div>
+  </section><!-- Footer -->
+  <footer class="bg-gray-800 text-white py-16">
+   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+     <div>
+      <h3 class="text-2xl font-bold text-pink-400 mb-4" id="footer-title">Elegant Bracelets</h3>
+      <p class="text-gray-300 mb-4">Crafting beautiful, handmade bracelets with love and attention to detail since 2019.</p>
+      <div class="flex space-x-4"><a href="#" class="text-pink-400 hover:text-pink-300 transition-colors"><i class="fab fa-facebook-f"></i></a> <a href="#" class="text-pink-400 hover:text-pink-300 transition-colors"><i class="fab fa-instagram"></i></a> <a href="#" class="text-pink-400 hover:text-pink-300 transition-colors"><i class="fab fa-pinterest"></i></a> <a href="#" class="text-pink-400 hover:text-pink-300 transition-colors"><i class="fab fa-twitter"></i></a>
+      </div>
+     </div>
+     <div>
+      <h4 class="text-lg font-semibold mb-4">Quick Links</h4>
+      <ul class="space-y-2">
+       <li><a href="#home" class="text-gray-300 hover:text-pink-400 transition-colors">Home</a></li>
+       <li><a href="#products" class="text-gray-300 hover:text-pink-400 transition-colors">Products</a></li>
+       <li><a href="#custom" class="text-gray-300 hover:text-pink-400 transition-colors">Custom Orders</a></li>
+       <li><a href="#gallery" class="text-gray-300 hover:text-pink-400 transition-colors">Gallery</a></li>
+       <li><a href="#blog" class="text-gray-300 hover:text-pink-400 transition-colors">Blog</a></li>
+      </ul>
+     </div>
+     <div>
+      <h4 class="text-lg font-semibold mb-4">Services</h4>
+      <ul class="space-y-2">
+       <li><a href="#" class="text-gray-300 hover:text-pink-400 transition-colors">Custom Design</a></li>
+       <li><a href="#" class="text-gray-300 hover:text-pink-400 transition-colors">Engraving</a></li>
+       <li><a href="#" class="text-gray-300 hover:text-pink-400 transition-colors">Gift Wrapping</a></li>
+       <li><a href="#" class="text-gray-300 hover:text-pink-400 transition-colors">Repair Service</a></li>
+       <li><a href="#" class="text-gray-300 hover:text-pink-400 transition-colors">Care Guide</a></li>
+      </ul>
+     </div>
+     <div>
+      <h4 class="text-lg font-semibold mb-4">Newsletter</h4>
+      <p class="text-gray-300 mb-4">Subscribe for exclusive offers and new collection updates.</p>
+      <form id="newsletter-form" class="space-y-2"><input type="email" id="newsletter-email" placeholder="Your email" class="w-full px-4 py-2 bg-gray-700 border border-gray-600 rounded text-white focus:outline-none focus:ring-2 focus:ring-pink-500"> <button type="submit" class="w-full bg-pink-600 text-white py-2 rounded font-semibold hover:bg-pink-700 transition-colors">Subscribe</button>
+      </form>
+     </div>
+    </div>
+    <div class="border-t border-gray-700 mt-12 pt-8 text-center">
+     <p class="text-gray-300">© 2024 Elegant Handmade Bracelets. All rights reserved.</p>
+    </div>
+   </div>
+  </footer><!-- Chatbot -->
+  <div class="chatbot"><button id="chatbot-toggle" class="bg-pink-600 text-white p-4 rounded-full shadow-lg hover:bg-pink-700 transition-colors"> <i class="fas fa-comments text-xl"></i> </button>
+   <div id="chatbot-window" class="hidden fixed bottom-20 right-4 w-80 bg-white rounded-2xl shadow-2xl border border-pink-200">
+    <div class="bg-pink-600 text-white p-4 rounded-t-2xl">
+     <div class="flex justify-between items-center">
+      <h4 class="font-semibold">Design Assistant</h4><button id="chatbot-close" class="text-white hover:text-pink-200"> <i class="fas fa-times"></i> </button>
+     </div>
+    </div>
+    <div class="p-4 h-64 overflow-y-auto" id="chatbot-messages">
+     <div class="bg-pink-50 p-3 rounded-lg mb-3">
+      <p class="text-sm">Hi! I'm here to help you find the perfect bracelet or create a custom design. How can I assist you today?</p>
+     </div>
+    </div>
+    <div class="p-4 border-t">
+     <div class="flex space-x-2"><input type="text" id="chatbot-input" placeholder="Ask about our bracelets..." class="flex-1 px-3 py-2 border border-pink-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-pink-500"> <button id="chatbot-send" class="bg-pink-600 text-white px-4 py-2 rounded-lg hover:bg-pink-700 transition-colors"> <i class="fas fa-paper-plane"></i> </button>
+     </div>
+    </div>
+   </div>
+  </div>
+  <script>
+        // Configuration object
+        const defaultConfig = {
+            site_title: "Elegant Handmade Bracelets",
+            hero_title: "Crafted with Love, Worn with Pride",
+            hero_subtitle: "Discover our collection of handmade elegant bracelets, each piece uniquely crafted for the modern woman",
+            studio_address: "123 Artisan Street, Creative District\nNew York, NY 10001",
+            phone_number: "+1 (555) 123-4567",
+            email_address: "hello@elegantbracelets.com",
+            background_color: "#f8bbd9",
+            surface_color: "#ffffff",
+            text_color: "#1f2937",
+            primary_action_color: "#db2777",
+            secondary_action_color: "#ec4899",
+            font_family: "Inter",
+            font_size: 16
+        };
+
+        let config = { ...defaultConfig };
+        let currentLanguage = 'en';
+        let isDarkMode = false;
+        let currentRating = 0;
+        let currentRecordCount = 0;
+
+        // Translations
+        const translations = {
+            en: {
+                nav_home: "Home",
+                nav_products: "Products",
+                nav_custom: "Custom Order",
+                nav_gallery: "Gallery",
+                nav_blog: "Blog",
+                nav_contact: "Contact",
+                hero_cta1: "Shop Now",
+                hero_cta2: "Custom Design",
+                stats_customers: "Happy Customers",
+                stats_designs: "Unique Designs",
+                stats_satisfaction: "Satisfaction Rate %",
+                stats_experience: "Years Experience"
+            },
+            id: {
+                nav_home: "Beranda",
+                nav_products: "Produk",
+                nav_custom: "Pesanan Khusus",
+                nav_gallery: "Galeri",
+                nav_blog: "Blog",
+                nav_contact: "Kontak",
+                hero_cta1: "Belanja Sekarang",
+                hero_cta2: "Desain Khusus",
+                stats_customers: "Pelanggan Bahagia",
+                stats_designs: "Desain Unik",
+                stats_satisfaction: "Tingkat Kepuasan %",
+                stats_experience: "Tahun Pengalaman"
+            }
+        };
+
+        // Sample data
+        const products = [
+            { id: 1, name: "Rose Gold Elegance", price: "$89", category: "gold", image: "🌹", description: "Delicate rose gold bracelet with crystal accents" },
+            { id: 2, name: "Silver Charm", price: "$65", category: "silver", image: "✨", description: "Sterling silver bracelet with personalized charms" },
+            { id: 3, name: "Gemstone Dreams", price: "$120", category: "gemstone", image: "💎", description: "Natural gemstone bracelet with healing properties" },
+            { id: 4, name: "Custom Creation", price: "$150", category: "custom", image: "🎨", description: "Fully customizable design made just for you" },
+            { id: 5, name: "Golden Sunset", price: "$95", category: "gold", image: "🌅", description: "14K gold bracelet inspired by sunset colors" },
+            { id: 6, name: "Moonlight Silver", price: "$75", category: "silver", image: "🌙", description: "Elegant silver bracelet with moon phase design" }
+        ];
+
+        const galleryItems = [
+            { type: "image", src: "🎨", title: "Crafting Process", description: "Behind the scenes of our handmade process" },
+            { type: "image", src: "💍", title: "Finished Pieces", description: "Beautiful completed bracelets" },
+            { type: "video", src: "🎬", title: "Making Process", description: "Watch how we create each piece" },
+            { type: "image", src: "🏪", title: "Our Studio", description: "Virtual tour of our creative space" },
+            { type: "image", src: "📦", title: "Gift Packaging", description: "Elegant gift wrapping service" },
+            { type: "image", src: "🔧", title: "Tools & Materials", description: "Premium tools and materials we use" }
+        ];
+
+        const blogPosts = [
+            { title: "How to Style Your Bracelet", excerpt: "Tips for matching bracelets with different outfits", image: "👗", date: "Dec 15, 2024" },
+            { title: "Caring for Your Jewelry", excerpt: "Essential maintenance tips to keep your bracelet beautiful", image: "✨", date: "Dec 10, 2024" },
+            { title: "Choosing the Right Size", excerpt: "Guide to finding the perfect bracelet fit", image: "📏", date: "Dec 5, 2024" }
+        ];
+
+        const testimonials = [
+            { name: "Sarah Johnson", text: "Absolutely beautiful bracelet! The craftsmanship is incredible.", rating: 5, product: "Rose Gold Elegance" },
+            { name: "Maria Garcia", text: "Perfect custom design exactly as I imagined. Highly recommend!", rating: 5, product: "Custom Creation" },
+            { name: "Emily Chen", text: "Great quality and fast shipping. Will definitely order again.", rating: 5, product: "Silver Charm" },
+            { name: "Lisa Brown", text: "The gemstone bracelet is stunning and feels amazing to wear.", rating: 5, product: "Gemstone Dreams" }
+        ];
+
+        // Data SDK Handler
+        const dataHandler = {
+            onDataChanged(data) {
+                currentRecordCount = data.length;
+                
+                // Update testimonials with user reviews
+                const userReviews = data.filter(item => item.type === 'review');
+                if (userReviews.length > 0) {
+                    updateTestimonialCarousel([...testimonials, ...userReviews]);
+                }
+            }
+        };
+
+        // Initialize SDK
+        async function initializeSDK() {
+            if (window.dataSdk) {
+                const result = await window.dataSdk.init(dataHandler);
+                if (!result.isOk) {
+                    console.error("Failed to initialize data SDK");
+                }
+            }
+
+            if (window.elementSdk) {
+                await window.elementSdk.init({
+                    defaultConfig,
+                    onConfigChange: async (newConfig) => {
+                        config = { ...config, ...newConfig };
+                        updateUIFromConfig();
+                    },
+                    mapToCapabilities: (config) => ({
+                        recolorables: [
+                            {
+                                get: () => config.background_color || defaultConfig.background_color,
+                                set: (value) => {
+                                    config.background_color = value;
+                                    window.elementSdk.setConfig({ background_color: value });
+                                }
+                            },
+                            {
+                                get: () => config.surface_color || defaultConfig.surface_color,
+                                set: (value) => {
+                                    config.surface_color = value;
+                                    window.elementSdk.setConfig({ surface_color: value });
+                                }
+                            },
+                            {
+                                get: () => config.text_color || defaultConfig.text_color,
+                                set: (value) => {
+                                    config.text_color = value;
+                                    window.elementSdk.setConfig({ text_color: value });
+                                }
+                            },
+                            {
+                                get: () => config.primary_action_color || defaultConfig.primary_action_color,
+                                set: (value) => {
+                                    config.primary_action_color = value;
+                                    window.elementSdk.setConfig({ primary_action_color: value });
+                                }
+                            },
+                            {
+                                get: () => config.secondary_action_color || defaultConfig.secondary_action_color,
+                                set: (value) => {
+                                    config.secondary_action_color = value;
+                                    window.elementSdk.setConfig({ secondary_action_color: value });
+                                }
+                            }
+                        ],
+                        borderables: [],
+                        fontEditable: {
+                            get: () => config.font_family || defaultConfig.font_family,
+                            set: (value) => {
+                                config.font_family = value;
+                                window.elementSdk.setConfig({ font_family: value });
+                            }
+                        },
+                        fontSizeable: {
+                            get: () => config.font_size || defaultConfig.font_size,
+                            set: (value) => {
+                                config.font_size = value;
+                                window.elementSdk.setConfig({ font_size: value });
+                            }
+                        }
+                    }),
+                    mapToEditPanelValues: (config) => new Map([
+                        ["site_title", config.site_title || defaultConfig.site_title],
+                        ["hero_title", config.hero_title || defaultConfig.hero_title],
+                        ["hero_subtitle", config.hero_subtitle || defaultConfig.hero_subtitle],
+                        ["studio_address", config.studio_address || defaultConfig.studio_address],
+                        ["phone_number", config.phone_number || defaultConfig.phone_number],
+                        ["email_address", config.email_address || defaultConfig.email_address]
+                    ])
+                });
+            }
+        }
+
+        function updateUIFromConfig() {
+            const customFont = config.font_family || defaultConfig.font_family;
+            const baseSize = config.font_size || defaultConfig.font_size;
+            const baseFontStack = 'system-ui, -apple-system, sans-serif';
+
+            // Update colors
+            document.documentElement.style.setProperty('--primary-pink', config.background_color || defaultConfig.background_color);
+            document.documentElement.style.setProperty('--secondary-pink', config.surface_color || defaultConfig.surface_color);
+            document.documentElement.style.setProperty('--accent-pink', config.primary_action_color || defaultConfig.primary_action_color);
+            document.documentElement.style.setProperty('--dark-pink', config.secondary_action_color || defaultConfig.secondary_action_color);
+
+            // Update fonts
+            document.body.style.fontFamily = `${customFont}, ${baseFontStack}`;
+            document.body.style.fontSize = `${baseSize}px`;
+
+            // Update text content
+            const navTitle = document.getElementById('nav-title');
+            if (navTitle) navTitle.textContent = config.site_title || defaultConfig.site_title;
+
+            const heroTitle = document.getElementById('hero-title');
+            if (heroTitle) heroTitle.textContent = config.hero_title || defaultConfig.hero_title;
+
+            const heroSubtitle = document.getElementById('hero-subtitle');
+            if (heroSubtitle) heroSubtitle.textContent = config.hero_subtitle || defaultConfig.hero_subtitle;
+
+            const studioAddress = document.getElementById('studio-address');
+            if (studioAddress) studioAddress.textContent = config.studio_address || defaultConfig.studio_address;
+
+            const phoneNumber = document.getElementById('phone-number');
+            if (phoneNumber) phoneNumber.textContent = config.phone_number || defaultConfig.phone_number;
+
+            const emailAddress = document.getElementById('email-address');
+            if (emailAddress) emailAddress.textContent = config.email_address || defaultConfig.email_address;
+
+            const footerTitle = document.getElementById('footer-title');
+            if (footerTitle) footerTitle.textContent = config.site_title || defaultConfig.site_title;
+        }
+
+        // Initialize everything when DOM is loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeSDK();
+            initializeComponents();
+            setupEventListeners();
+            loadProducts();
+            loadGallery();
+            loadBlogPosts();
+            updateTestimonialCarousel(testimonials);
+            setupScrollAnimations();
+            setupCounters();
+        });
+
+        function initializeComponents() {
+            // Mobile menu toggle
+            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            
+            mobileMenuBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+
+            // Dark mode toggle
+            const darkModeToggle = document.getElementById('dark-mode-toggle');
+            darkModeToggle.addEventListener('click', toggleDarkMode);
+
+            // Language switcher
+            const languageSwitcher = document.getElementById('language-switcher');
+            languageSwitcher.addEventListener('change', (e) => {
+                currentLanguage = e.target.value;
+                updateLanguage();
+            });
+
+            // Smooth scrolling for navigation links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+        }
+
+        function setupEventListeners() {
+            // Product filters
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    document.querySelectorAll('.filter-btn').forEach(b => {
+                        b.classList.remove('active', 'bg-pink-600', 'text-white');
+                        b.classList.add('bg-white', 'text-pink-600', 'border', 'border-pink-600');
+                    });
+                    
+                    e.target.classList.add('active', 'bg-pink-600', 'text-white');
+                    e.target.classList.remove('bg-white', 'text-pink-600', 'border', 'border-pink-600');
+                    
+                    filterProducts(e.target.dataset.filter);
+                });
+            });
+
+            // Search functionality
+            const searchBar = document.getElementById('search-bar');
+            searchBar.addEventListener('input', (e) => {
+                searchProducts(e.target.value);
+            });
+
+            // Rating stars
+            document.querySelectorAll('#rating-stars i').forEach(star => {
+                star.addEventListener('click', (e) => {
+                    currentRating = parseInt(e.target.dataset.rating);
+                    updateStarRating(currentRating);
+                });
+            });
+
+            // Chatbot
+            setupChatbot();
+
+            // Forms
+            setupForms();
+        }
+
+        function setupForms() {
+            // Custom order form
+            const customOrderForm = document.getElementById('custom-order-form');
+            customOrderForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                
+                if (currentRecordCount >= 999) {
+                    showToast("Maximum limit of 999 orders reached. Please try again later.", "error");
+                    return;
+                }
+
+                const submitBtn = e.target.querySelector('button[type="submit"]');
+                const submitText = submitBtn.querySelector('.submit-text');
+                const loadingText = submitBtn.querySelector('.loading-text');
+                
+                submitText.classList.add('hidden');
+                loadingText.classList.remove('hidden');
+                submitBtn.disabled = true;
+
+                const formData = {
+                    id: Date.now().toString(),
+                    type: 'custom_order',
+                    name: document.getElementById('custom-name').value,
+                    email: document.getElementById('custom-email').value,
+                    message: document.getElementById('custom-description').value,
+                    product: document.getElementById('custom-material').value,
+                    timestamp: new Date().toISOString()
+                };
+
+                if (window.dataSdk) {
+                    const result = await window.dataSdk.create(formData);
+                    
+                    if (result.isOk) {
+                        showToast("Custom order request submitted successfully!", "success");
+                        customOrderForm.reset();
+                    } else {
+                        showToast("Failed to submit request. Please try again.", "error");
+                    }
+                } else {
+                    showToast("Custom order request submitted successfully!", "success");
+                    customOrderForm.reset();
+                }
+
+                submitText.classList.remove('hidden');
+                loadingText.classList.add('hidden');
+                submitBtn.disabled = false;
+            });
+
+            // Review form
+            const reviewForm = document.getElementById('review-form');
+            reviewForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                
+                if (currentRecordCount >= 999) {
+                    showToast("Maximum limit of 999 reviews reached. Please try again later.", "error");
+                    return;
+                }
+
+                const submitBtn = e.target.querySelector('button[type="submit"]');
+                const submitText = submitBtn.querySelector('.submit-text');
+                const loadingText = submitBtn.querySelector('.loading-text');
+                
+                submitText.classList.add('hidden');
+                loadingText.classList.remove('hidden');
+                submitBtn.disabled = true;
+
+                const reviewData = {
+                    id: Date.now().toString(),
+                    type: 'review',
+                    name: document.getElementById('review-name').value,
+                    product: document.getElementById('review-product').value,
+                    message: document.getElementById('review-message').value,
+                    rating: currentRating,
+                    timestamp: new Date().toISOString()
+                };
+
+                if (window.dataSdk) {
+                    const result = await window.dataSdk.create(reviewData);
+                    
+                    if (result.isOk) {
+                        showToast("Review submitted successfully!", "success");
+                        reviewForm.reset();
+                        currentRating = 0;
+                        updateStarRating(0);
+                    } else {
+                        showToast("Failed to submit review. Please try again.", "error");
+                    }
+                } else {
+                    showToast("Review submitted successfully!", "success");
+                    reviewForm.reset();
+                    currentRating = 0;
+                    updateStarRating(0);
+                }
+
+                submitText.classList.remove('hidden');
+                loadingText.classList.add('hidden');
+                submitBtn.disabled = false;
+            });
+
+            // Contact form
+            const contactForm = document.getElementById('contact-form');
+            contactForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                
+                if (currentRecordCount >= 999) {
+                    showToast("Maximum limit of 999 messages reached. Please try again later.", "error");
+                    return;
+                }
+
+                const submitBtn = e.target.querySelector('button[type="submit"]');
+                const submitText = submitBtn.querySelector('.submit-text');
+                const loadingText = submitBtn.querySelector('.loading-text');
+                
+                submitText.classList.add('hidden');
+                loadingText.classList.remove('hidden');
+                submitBtn.disabled = true;
+
+                const contactData = {
+                    id: Date.now().toString(),
+                    type: 'contact',
+                    name: `${document.getElementById('contact-first-name').value} ${document.getElementById('contact-last-name').value}`,
+                    email: document.getElementById('contact-email').value,
+                    message: `Subject: ${document.getElementById('contact-subject').value}\n\n${document.getElementById('contact-message').value}`,
+                    timestamp: new Date().toISOString()
+                };
+
+                if (window.dataSdk) {
+                    const result = await window.dataSdk.create(contactData);
+                    
+                    if (result.isOk) {
+                        showToast("Message sent successfully! We'll get back to you soon.", "success");
+                        contactForm.reset();
+                    } else {
+                        showToast("Failed to send message. Please try again.", "error");
+                    }
+                } else {
+                    showToast("Message sent successfully! We'll get back to you soon.", "success");
+                    contactForm.reset();
+                }
+
+                submitText.classList.remove('hidden');
+                loadingText.classList.add('hidden');
+                submitBtn.disabled = false;
+            });
+
+            // Newsletter form
+            const newsletterForm = document.getElementById('newsletter-form');
+            newsletterForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                
+                if (currentRecordCount >= 999) {
+                    showToast("Maximum limit reached. Please try again later.", "error");
+                    return;
+                }
+
+                const newsletterData = {
+                    id: Date.now().toString(),
+                    type: 'newsletter',
+                    email: document.getElementById('newsletter-email').value,
+                    timestamp: new Date().toISOString()
+                };
+
+                if (window.dataSdk) {
+                    const result = await window.dataSdk.create(newsletterData);
+                    
+                    if (result.isOk) {
+                        showToast("Successfully subscribed to newsletter!", "success");
+                        newsletterForm.reset();
+                    } else {
+                        showToast("Failed to subscribe. Please try again.", "error");
+                    }
+                } else {
+                    showToast("Successfully subscribed to newsletter!", "success");
+                    newsletterForm.reset();
+                }
+            });
+        }
+
+        function setupChatbot() {
+            const chatbotToggle = document.getElementById('chatbot-toggle');
+            const chatbotWindow = document.getElementById('chatbot-window');
+            const chatbotClose = document.getElementById('chatbot-close');
+            const chatbotSend = document.getElementById('chatbot-send');
+            const chatbotInput = document.getElementById('chatbot-input');
+            const chatbotMessages = document.getElementById('chatbot-messages');
+
+            chatbotToggle.addEventListener('click', () => {
+                chatbotWindow.classList.toggle('hidden');
+            });
+
+            chatbotClose.addEventListener('click', () => {
+                chatbotWindow.classList.add('hidden');
+            });
+
+            function sendMessage() {
+                const message = chatbotInput.value.trim();
+                if (!message) return;
+
+                // Add user message
+                const userMsg = document.createElement('div');
+                userMsg.className = 'text-right mb-3';
+                userMsg.innerHTML = `<div class="bg-pink-600 text-white p-3 rounded-lg inline-block max-w-xs"><p class="text-sm">${message}</p></div>`;
+                chatbotMessages.appendChild(userMsg);
+
+                // Generate bot response
+                setTimeout(() => {
+                    const botResponse = generateBotResponse(message);
+                    const botMsg = document.createElement('div');
+                    botMsg.className = 'mb-3';
+                    botMsg.innerHTML = `<div class="bg-pink-50 p-3 rounded-lg inline-block max-w-xs"><p class="text-sm">${botResponse}</p></div>`;
+                    chatbotMessages.appendChild(botMsg);
+                    chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+                }, 1000);
+
+                chatbotInput.value = '';
+                chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+            }
+
+            chatbotSend.addEventListener('click', sendMessage);
+            chatbotInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') {
+                    sendMessage();
+                }
+            });
+        }
+
+        function generateBotResponse(message) {
+            const lowerMessage = message.toLowerCase();
+            
+            if (lowerMessage.includes('custom') || lowerMessage.includes('design')) {
+                return "I'd love to help you create a custom bracelet! You can choose from sterling silver, 14K gold, rose gold, or platinum. What style are you thinking of?";
+            } else if (lowerMessage.includes('price') || lowerMessage.includes('cost')) {
+                return "Our bracelets range from $65-$150. Custom designs start at $150. Would you like to see our current collection?";
+            } else if (lowerMessage.includes('material') || lowerMessage.includes('silver') || lowerMessage.includes('gold')) {
+                return "We use premium materials including sterling silver, 14K gold, rose gold, and platinum. All pieces come with a quality guarantee!";
+            } else if (lowerMessage.includes('shipping') || lowerMessage.includes('delivery')) {
+                return "We offer free shipping on orders over $75. Standard delivery takes 3-5 business days, and we also offer express shipping options.";
+            } else if (lowerMessage.includes('size') || lowerMessage.includes('fit')) {
+                return "We offer adjustable sizing on most bracelets. For custom pieces, we can create the perfect fit based on your wrist measurement.";
+            } else {
+                return "Thank you for your question! For detailed information about our products and services, feel free to browse our collection or contact us directly. Is there anything specific you'd like to know about our bracelets?";
+            }
+        }
+
+        function loadProducts() {
+            const productGrid = document.getElementById('product-grid');
+            productGrid.innerHTML = '';
+
+            products.forEach(product => {
+                const productCard = document.createElement('div');
+                productCard.className = `product-card bg-white rounded-2xl shadow-lg overflow-hidden fade-in`;
+                productCard.dataset.category = product.category;
+                
+                productCard.innerHTML = `
+                    <div class="aspect-square bg-gradient-to-br from-pink-100 to-pink-200 flex items-center justify-center">
+                        <span class="text-6xl">${product.image}</span>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-800 mb-2">${product.name}</h3>
+                        <p class="text-gray-600 mb-4">${product.description}</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-2xl font-bold text-pink-600">${product.price}</span>
+                            <button class="bg-pink-600 text-white px-4 py-2 rounded-full hover:bg-pink-700 transition-colors">
+                                Add to Cart
+                            </button>
+                        </div>
+                    </div>
+                `;
+                
+                productGrid.appendChild(productCard);
+            });
+        }
+
+        function filterProducts(category) {
+            const productCards = document.querySelectorAll('.product-card');
+            
+            productCards.forEach(card => {
+                if (category === 'all' || card.dataset.category === category) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        function searchProducts(query) {
+            const productCards = document.querySelectorAll('.product-card');
+            const searchTerm = query.toLowerCase();
+            
+            productCards.forEach(card => {
+                const productName = card.querySelector('h3').textContent.toLowerCase();
+                const productDescription = card.querySelector('p').textContent.toLowerCase();
+                
+                if (productName.includes(searchTerm) || productDescription.includes(searchTerm)) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        function loadGallery() {
+            const galleryGrid = document.getElementById('gallery-grid');
+            galleryGrid.innerHTML = '';
+
+            galleryItems.forEach(item => {
+                const galleryItem = document.createElement('div');
+                galleryItem.className = 'bg-white rounded-2xl shadow-lg overflow-hidden fade-in hover:shadow-xl transition-shadow cursor-pointer';
+                
+                galleryItem.innerHTML = `
+                    <div class="aspect-square bg-gradient-to-br from-pink-100 to-pink-200 flex items-center justify-center relative">
+                        <span class="text-6xl">${item.src}</span>
+                        ${item.type === 'video' ? '<div class="absolute inset-0 flex items-center justify-center bg-black bg-opacity-30"><i class="fas fa-play text-white text-3xl"></i></div>' : ''}
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-bold text-gray-800 mb-2">${item.title}</h3>
+                        <p class="text-gray-600 text-sm">${item.description}</p>
+                    </div>
+                `;
+                
+                galleryGrid.appendChild(galleryItem);
+            });
+        }
+
+        function loadBlogPosts() {
+            const blogGrid = document.getElementById('blog-grid');
+            blogGrid.innerHTML = '';
+
+            blogPosts.forEach(post => {
+                const blogCard = document.createElement('div');
+                blogCard.className = 'bg-white rounded-2xl shadow-lg overflow-hidden fade-in hover:shadow-xl transition-shadow cursor-pointer';
+                
+                blogCard.innerHTML = `
+                    <div class="aspect-video bg-gradient-to-br from-pink-100 to-pink-200 flex items-center justify-center">
+                        <span class="text-6xl">${post.image}</span>
+                    </div>
+                    <div class="p-6">
+                        <div class="text-sm text-pink-600 mb-2">${post.date}</div>
+                        <h3 class="text-xl font-bold text-gray-800 mb-3">${post.title}</h3>
+                        <p class="text-gray-600 mb-4">${post.excerpt}</p>
+                        <button class="text-pink-600 font-semibold hover:text-pink-700 transition-colors">
+                            Read More →
+                        </button>
+                    </div>
+                `;
+                
+                blogGrid.appendChild(blogCard);
+            });
+        }
+
+        function updateTestimonialCarousel(testimonialData) {
+            const testimonialTrack = document.getElementById('testimonial-track');
+            testimonialTrack.innerHTML = '';
+
+            // Duplicate testimonials for seamless loop
+            const allTestimonials = [...testimonialData, ...testimonialData];
+
+            allTestimonials.forEach(testimonial => {
+                const testimonialCard = document.createElement('div');
+                testimonialCard.className = 'flex-shrink-0 w-80 bg-white rounded-2xl shadow-lg p-6 mx-4';
+                
+                const stars = '★'.repeat(testimonial.rating || 5) + '☆'.repeat(5 - (testimonial.rating || 5));
+                
+                testimonialCard.innerHTML = `
+                    <div class="text-yellow-400 text-xl mb-3">${stars}</div>
+                    <p class="text-gray-600 mb-4">"${testimonial.text || testimonial.message}"</p>
+                    <div class="flex items-center">
+                        <div class="w-12 h-12 bg-pink-200 rounded-full flex items-center justify-center mr-4">
+                            <span class="text-pink-600 font-bold">${testimonial.name.charAt(0)}</span>
+                        </div>
+                        <div>
+                            <div class="font-semibold text-gray-800">${testimonial.name}</div>
+                            <div class="text-sm text-gray-500">${testimonial.product}</div>
+                        </div>
+                    </div>
+                `;
+                
+                testimonialTrack.appendChild(testimonialCard);
+            });
+        }
+
+        function updateStarRating(rating) {
+            document.querySelectorAll('#rating-stars i').forEach((star, index) => {
+                if (index < rating) {
+                    star.classList.remove('text-gray-300');
+                    star.classList.add('text-yellow-400');
+                } else {
+                    star.classList.remove('text-yellow-400');
+                    star.classList.add('text-gray-300');
+                }
+            });
+        }
+
+        function setupScrollAnimations() {
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('.fade-in').forEach(el => {
+                observer.observe(el);
+            });
+
+            // Parallax effect
+            window.addEventListener('scroll', () => {
+                const scrolled = window.pageYOffset;
+                const parallaxElements = document.querySelectorAll('.parallax');
+                
+                parallaxElements.forEach(element => {
+                    const speed = element.dataset.speed || 0.5;
+                    element.style.setProperty('--scroll-y', `${scrolled * speed}px`);
+                });
+            });
+        }
+
+        function setupCounters() {
+            const counters = document.querySelectorAll('.counter');
+            
+            const observerOptions = {
+                threshold: 0.5
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const counter = entry.target;
+                        const target = parseInt(counter.dataset.target);
+                        let current = 0;
+                        const increment = target / 100;
+                        
+                        const updateCounter = () => {
+                            if (current < target) {
+                                current += increment;
+                                counter.textContent = Math.ceil(current);
+                                requestAnimationFrame(updateCounter);
+                            } else {
+                                counter.textContent = target;
+                            }
+                        };
+                        
+                        updateCounter();
+                        observer.unobserve(counter);
+                    }
+                });
+            }, observerOptions);
+
+            counters.forEach(counter => {
+                observer.observe(counter);
+            });
+        }
+
+        function toggleDarkMode() {
+            isDarkMode = !isDarkMode;
+            document.body.classList.toggle('dark-mode', isDarkMode);
+            
+            const darkModeToggle = document.getElementById('dark-mode-toggle');
+            const icon = darkModeToggle.querySelector('i');
+            
+            if (isDarkMode) {
+                icon.classList.remove('fa-moon');
+                icon.classList.add('fa-sun');
+                darkModeToggle.classList.remove('bg-pink-100', 'hover:bg-pink-200');
+                darkModeToggle.classList.add('bg-gray-700', 'hover:bg-gray-600');
+            } else {
+                icon.classList.remove('fa-sun');
+                icon.classList.add('fa-moon');
+                darkModeToggle.classList.remove('bg-gray-700', 'hover:bg-gray-600');
+                darkModeToggle.classList.add('bg-pink-100', 'hover:bg-pink-200');
+            }
+        }
+
+        function updateLanguage() {
+            const t = translations[currentLanguage];
+            
+            // Update navigation
+            document.querySelectorAll('.nav-link').forEach((link, index) => {
+                const keys = ['nav_home', 'nav_products', 'nav_custom', 'nav_gallery', 'nav_blog', 'nav_contact'];
+                if (keys[index] && t[keys[index]]) {
+                    link.textContent = t[keys[index]];
+                }
+            });
+
+            // Update other translatable elements
+            const heroButtons = document.querySelectorAll('#home button');
+            if (heroButtons[0] && t.hero_cta1) heroButtons[0].textContent = t.hero_cta1;
+            if (heroButtons[1] && t.hero_cta2) heroButtons[1].textContent = t.hero_cta2;
+        }
+
+        function showToast(message, type = 'success') {
+            const toast = document.createElement('div');
+            toast.className = `fixed top-20 right-4 z-50 p-4 rounded-lg shadow-lg text-white transform translate-x-full transition-transform duration-300 ${
+                type === 'success' ? 'bg-green-500' : 'bg-red-500'
+            }`;
+            toast.textContent = message;
+            
+            document.body.appendChild(toast);
+            
+            setTimeout(() => {
+                toast.classList.remove('translate-x-full');
+            }, 100);
+            
+            setTimeout(() => {
+                toast.classList.add('translate-x-full');
+                setTimeout(() => {
+                    document.body.removeChild(toast);
+                }, 300);
+            }, 3000);
+        }
+    </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'99f427fcb30c051a',t:'MTc2MzI2NjQxMS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
